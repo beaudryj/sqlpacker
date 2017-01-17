@@ -14,8 +14,8 @@ $SQL =  "C:\SQL\SqlExpr\SETUP.EXE"
 $time = Get-Date
 write-output "Installing SQL - $Time" 
 
-$InstallFlags = 'Setup.exe /q /ACTION=PrepareImage /FEATURES=SQL /InstanceID ="MSSQLSERVER" /IACCEPTSQLSERVERLICENSETERMS '
-Start-Process $SQL -ArgumentList $InstallFlags -wait -Verb RunAs 
+$InstallFlags = '/ACTION=PrepareImage /FEATURES=SQL /InstanceID="MSSQLSERVER" /IACCEPTSQLSERVERLICENSETERMS /QS'
+Start-Process $SQL -ArgumentList $InstallFlags -wait -NoNewWindow
 
 
 $time = Get-Date
@@ -47,7 +47,14 @@ function Invoke-DownloadSQL($url, $targetFile)
        Write-Progress -activity "Downloading file '$($url.split('/') | Select -Last 1)'" -status "Downloaded ($([System.Math]::Floor($downloadedBytes/1024))K of $($totalLength)K): " -PercentComplete ((([System.Math]::Floor($downloadedBytes/1024)) / $totalLength)  * 100)
    }
    Write-Progress -activity "Finished downloading file '$($url.split('/') | Select -Last 1)'"
+   $targetStream.Flush()
+   $targetStream.Close()
+   $targetStream.Dispose()
+   $responseStream.Dispose()
 }
+
+
+New-Item C:\SqlDownload -ItemType Directory -Force
 
 
 Invoke-DownloadSQL -url "https://download.microsoft.com/download/E/A/E/EAE6F7FC-767A-4038-A954-49B8B05D04EB/Express%2064BIT/SQLEXPR_x64_ENU.exe" -targetFile "C:\SqlDownload\SQLEXPR_x64_ENU.exe"
