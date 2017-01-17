@@ -1,0 +1,6 @@
+output-*/*
+packer_cache/
+*.box
+*.ovf
+*.vmdk
+*.iso
