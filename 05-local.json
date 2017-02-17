@@ -7,7 +7,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "2048"
+          "8192"
         ],
         [
           "modifyvm",
@@ -19,7 +19,7 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "2"
+          "4"
         ]
       ],
       "source_path": "{{user `source_path`}}",
@@ -39,6 +39,10 @@
     {
       "type": "powershell",
       "script": "scripts/save_shutdown_command.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/configure_sql.ps1"
     }
   ],
   "post-processors": [
@@ -52,7 +56,7 @@
     ]
   ],
   "variables": {
-    "headless": "true",
+    "headless": "false",
     "os_name": "",
     "source_path": "",
     "image_name": "pkg-vagrant"

@@ -7,7 +7,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "4096"
+          "8192"
         ],
         [
           "modifyvm",
@@ -19,7 +19,7 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "2"
+          "4"
         ]
       ],
       "source_path": "{{user `source_path`}}",

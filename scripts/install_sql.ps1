@@ -3,7 +3,7 @@ $output = "C:\SqlDownload\SQLEXPR_x64_ENU.exe"
 $time = Get-Date
 write-output "Extracting SQL Download - $Time" 
 
-start-process $output "/q /x:C:\SQL\SqlExpr" -wait -verb RunAs
+start-process $output "/q /x:C:\SQL\SqlExpr" -wait -nonewwindow
 
 $time = Get-Date
 write-output "Finished Extracting SQL Download- $Time" 
@@ -14,8 +14,8 @@ $SQL =  "C:\SQL\SqlExpr\SETUP.EXE"
 $time = Get-Date
 write-output "Installing SQL - $Time" 
 
-$InstallFlags = '/ACTION=PrepareImage /FEATURES=SQL /InstanceID="MSSQLSERVER" /IACCEPTSQLSERVERLICENSETERMS /QS'
-Start-Process $SQL -ArgumentList $InstallFlags -wait -NoNewWindow
+$InstallFlags = '/ACTION=PrepareImage /FEATURES=SQLEngine /InstanceID="SQLExpress" /IACCEPTSQLSERVERLICENSETERMS /Q'
+Start-Process $SQL -ArgumentList $InstallFlags -wait -nonewwindow
 
 
 $time = Get-Date
@@ -56,6 +56,6 @@ function Invoke-DownloadSQL($url, $targetFile)
 
 New-Item C:\SqlDownload -ItemType Directory -Force
 
-
-Invoke-DownloadSQL -url "https://download.microsoft.com/download/E/A/E/EAE6F7FC-767A-4038-A954-49B8B05D04EB/Express%2064BIT/SQLEXPR_x64_ENU.exe" -targetFile "C:\SqlDownload\SQLEXPR_x64_ENU.exe"
+Add-WindowsFeature NET-Framework-Core
+Invoke-DownloadSQL -url "https://download.microsoft.com/download/9/0/7/907AD35F-9F9C-43A5-9789-52470555DB90/ENU/SQLEXPR_x64_ENU.exe" -targetFile "C:\SqlDownload\SQLEXPR_x64_ENU.exe"
 Invoke-InstallSQL

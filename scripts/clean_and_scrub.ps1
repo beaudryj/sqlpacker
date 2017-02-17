@@ -1,3 +1,7 @@
+$user = [adsi]"WinNT://$env:computername/vagrant"
+$user.UserFlags.value = $user.UserFlags.value -bor 0x10000
+$user.CommitChanges()
+
 Write-Host "Cleaning updates.."
 Stop-Service -Name wuauserv -Force
 Remove-Item c:\Windows\SoftwareDistribution\Download\* -Recurse -Force

@@ -21,7 +21,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "2048"
+          "8192"
         ],
         [
           "modifyvm",
@@ -33,7 +33,7 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "2"
+          "4"
         ]
       ],
       "vm_name": "{{ user `os_name` }}-{{ user `image_name` }}",

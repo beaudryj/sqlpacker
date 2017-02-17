@@ -7,7 +7,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "2048"
+          "8192"
         ],
         [
           "modifyvm",
@@ -19,7 +19,7 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "2"
+          "4"
         ]
       ],
       "vboxmanage_post": [
