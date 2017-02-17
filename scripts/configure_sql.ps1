@@ -38,9 +38,6 @@ Start-Process -FilePath "C:\SQL\SqlExpr\SETUP.EXE" -ArgumentList `$sqlSettingsSt
 
 "@
 
-Install-PackageProvider -Name NuGet -Force 
-
-Install-Module -Repository PSGallery -Name xWebAdministration -force
 
 
 New-Item C:\SQL\Invoke-ConfigureSQL.ps1 -type file -force -value $InstallSQL
